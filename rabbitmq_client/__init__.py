@@ -5,7 +5,7 @@ class RabbitmqClient:
     def __init__(self, host):
         self.host = host
         self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host=host))
+            pika.ConnectionParameters(host=self.host))
         self.channel = self.connection.channel()
 
     def pull(self, callback, queue, durable=True):
