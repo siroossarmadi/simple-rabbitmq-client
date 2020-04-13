@@ -1,7 +1,7 @@
 import pika
 
 
-class RabbitmqClient():
+class RabbitmqClient:
     def __init__(self, host):
         self.host = host
         self.connection = pika.BlockingConnection(
