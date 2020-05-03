@@ -24,10 +24,10 @@ class RabbitmqClient:
         method, _, body = self._channel.basic_get(queue=queue)
         return body, method
 
-    def push(self, message, routing_key, exchange='', delivery_mode=2):
+    def push(self, message, queue, exchange='', delivery_mode=2):
         self._channel.basic_publish(
             exchange=exchange,
-            routing_key=routing_key,
+            routing_key=queue,
             body=message,
             properties=pika.BasicProperties(
                 delivery_mode=delivery_mode,
