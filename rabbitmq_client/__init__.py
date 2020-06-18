@@ -10,14 +10,14 @@ class RabbitmqClient:
         self.p = None
 
     def push(self, message, queue, exchange=''):
-        promise = self.client.queue_declare(queue=queue)
+        promise = self.client.queue_declare(queue=queue, durable=True)
         self.client.wait(promise)
         promise = self.client.basic_publish(exchange=exchange, routing_key=queue,
                                             body=message)
         self.client.wait(promise)
 
     def pull(self, callback, queue):
-        promise = self.client.queue_declare(queue=queue)
+        promise = self.client.queue_declare(queue=queue, durable=True)
         self.client.wait(promise)
         consume_promise = self.client.basic_consume(
             queue=queue, prefetch_count=1)
